@@ -1,31 +1,15 @@
 [16]  # Version number. Do not delete.
 
 [[workspace]]
-# These directories and files will be scanned when a workspace is opened so that search etc. works.
-# Example:
-# C:/projects/my-project  # <- the first directory in the list becomes the working directory
-# C:/jai
-# src  # <- this would be relative to the config file location
 
 [ignore]
-# Files and directories matching the following wildcards will not be loaded or descended into
-# Example:
-# *.js - will ignore all files with a '.js' extension
-# tmp* - will ignore any files or directories which start with 'tmp'
-# C:/project/dirname/** - will ignore everything under `dirname`
-# C:/project/dirname/*  - will ignore all files under `dirname`, but not recursively
+
 .svn
 .git
 
 [allow]
-# Files and directories matching the wildcards in this section will be loaded, even if they are ignored in the previous section.
-# NOTE: known binary file extensions are ignored by default (*.exe, *.obj etc.). If this is not what you want, you can explicitly allow them here.
 
 [file associations]
-# Optional file associations in the format `<wildcard1> <wildcard2> ... : <language>`
-# Example:
-# *.hpp *.hh *.h : cpp
-# todo.txt : todo
 
 
 [[settings]]
@@ -100,10 +84,7 @@ line_wrap_is_on_by_default:                         true
 draw_indent_guides:                                 false
 
 
-# Below is an example configuration for build commands
-# (uncomment and modify to use)
-
-# [[build commands]]
+ [[build commands]]
 # build_working_dir:      <build working dir for all commands>  # <- paths relative to the workspace working dir (the first one in the list) are allowed
 # open_panel_on_build:    true  #  <- any settings specified here will apply to all commands unless overridden
 # close_panel_on_success: false
@@ -111,7 +92,7 @@ draw_indent_guides:                                 false
 # error_regex:            <compiler-specific error regex>  # see examples below
 # auto_jump_to_error:     false
 
-# [Debug Build And Run]   # <- command name. Can be arbitrary
+ [Debug Build And Run]   # <- command name. Can be arbitrary
 # build_command:          jai main.jai  # should be an executable or a script
 # build_working_dir:      <build working dir for this command only>
 # timeout_in_seconds:     5             # if you don't want a timeout, don't specify it
@@ -119,32 +100,15 @@ draw_indent_guides:                                 false
 # run_working_dir:        W:/focus      # working dir for the run command
 # key_binding:            F5
 
-# [Run]                   # <- You could have commands that don't build anything and just run something
+ [Run]                   # <- You could have commands that don't build anything and just run something
 # run_command:            test
 # run_working_dir:        /home/user/test
 # key_binding:            Ctrl-F5
 
-# [Release]
+ [Release]
 # build_command:          jai first.jai - release
 # key_binding:            F9
 
-
-# Example error regexes:
-# For jai:    ^(?P<file>.*):(?P<line>\d+),(?P<col>\d+): (?P<type>Error|Warning|Info|...):* (?P<msg>.*)|^(?P<msg1>.*error LNK.*)
-# For msvc:   ^(?P<file>.*)\((?P<line>\d+),?(?P<col>\d+)?\)[ ]?: (?P<type>error|warning) (?P<msg>.*)$
-# For golang: ^(?P<file>.*):(?P<line>\d+):(?P<col>\d+): (?P<msg>.*)$
-# For gcc:    ^(?P<file>.*):(?P<line>\d+):(?P<col>\d+): (?P<type>error|warning): (?P<msg>.*) (\[(?P<msg1>.*)\])?$
-# ... let us know what regex works for you and we'll add it here
-
-# NOTE:
-# You can use the following variables in build commands:
-# %FILE%      - full path to currenly active file
-# %FILE_DIR%  - the directory of the currently active file
-# %FILE_NAME% - current file name, with extension
-# %FILE_NAME_NO_EXTENSION% - current file name, without extension
-# %BUILD_WORKING_DIR%  - working dir of the build command
-# %RUN_WORKING_DIR%    - working dir of the run command
-# %PROJECT_CONFIG_DIR% - the dir containing the active project config file
 
 
 [[keymap]]
@@ -155,94 +119,44 @@ draw_indent_guides:                                 false
 
 # Key combination           Action
 Alt-F4                      quit
-
-Ctrl-D                      select_word_or_create_another_cursor
-Ctrl-R                      revert_select_word_or_create_another_cursor
-Ctrl-Shift->                      move_selection_to_next_word
+Ctrl-Shift-?                    select_word_or_create_another_cursor
+#Ctrl-Shift->                      revert_select_word_or_create_another_cursor
+#Ctrl-,               move_selection_to_next_word
 Ctrl-Shift-A                select_all_occurrences
+Ctrl-X Ctrl-K               duplicate_lines
 
-Ctrl-Shift-D                duplicate_lines
-
-# These shortcuts can be annoying to accidentally use, so they are commented out by default
-# Shift-Backspace             delete_line_and_go_up
-# Shift-Delete                delete_line
-
-Alt-ArrowUp                 move_selected_lines_up
-Alt-ArrowDown               move_selected_lines_down
-
-Ctrl-J                      join_lines
-Ctrl-Shift-J                join_lines_no_spaces_in_between
-
-Ctrl-U                      change_case_cycle
-
-Tab                         indent_or_go_to_next_tabstop
+Alt-P                       move_selected_lines_up
+Alt-N                       move_selected_lines_down
+Tab                         indent
 Shift-Tab                   unindent
 
-Ctrl-]                      indent
-Ctrl-[                      unindent
-
-Alt-S                      save
+Ctrl-X Ctrl-S               save
 Ctrl-Shift-S                save_as
-
-Alt-Minus                   move_to_previous_editor_history
-Alt-Plus                    move_to_next_editor_history
-
-Ctrl-PageUp                 move_to_previous_buffer
-Ctrl-PageDown               move_to_next_buffer
-
-Ctrl-C                      toggle_comment
+Ctrl-C C                    toggle_comment
 Ctrl-Space                  select_line #its like selecting line by line.
-
 Alt-K                       scroll_viewport_up
-Alt-E                       scroll_viewport_up_fast  # for some reason Alt-U didn't reach the window at all, so using Alt-E instead
-Alt-PageUp                  scroll_viewport_up_fast
 Alt-J                       scroll_viewport_down
-Alt-D                       scroll_viewport_down_fast
-Alt-PageDown                scroll_viewport_down_fast
-Alt-H                       scroll_viewport_left
-Alt-L                       scroll_viewport_right
-
-Ctrl-Alt-ArrowUp            scroll_viewport_up
-Ctrl-Alt-ArrowDown          scroll_viewport_down
-Ctrl-Alt-ArrowLeft          scroll_viewport_left
-Ctrl-Alt-ArrowRight         scroll_viewport_right
-
-#Alt-V                       move_cursor_to_viewport_center
-
-{Shift}-Ctrl-ArrowUp        move_up_to_empty_line
-{Shift}-Ctrl-ArrowDown      move_down_to_empty_line
-
-Alt-Shift-I                 add_cursors_to_line_ends
-Alt-Shift-Ctrl-I            add_cursors_to_line_starts
+Ctrl-L                       move_cursor_to_viewport_center
 
 Enter                       break_line
-Ctrl-Enter                  new_line_below_without_breaking
-Ctrl-Shift-Enter            new_line_above_without_breaking
-
-NumpadEnter                 break_line
-Ctrl-NumpadEnter            new_line_below_without_breaking
-Ctrl-Shift-NumpadEnter      new_line_above_without_breaking
-
-Ctrl-1                      switch_to_left_editor
-Ctrl-2                      switch_to_right_editor
-Ctrl-,                      switch_to_other_editor
-Ctrl-Shift-,                duplicate_editor
-
-Ctrl-Alt-Shift-ArrowLeft    move_editor_to_the_left
-Ctrl-Alt-Shift-ArrowRight   move_editor_to_the_right
-
-#Ctrl-N                      create_new_file
-Ctrl-Shift-N                create_new_file_on_the_side
-
-Alt-Shift-ArrowUp           create_cursor_above
-Alt-Shift-ArrowDown         create_cursor_below
-
-Alt-A                       align_cursors
-
+Ctrl-X 2                    switch_to_left_editor
+Ctrl-X 3                    switch_to_right_editor
+Ctrl-X O                    switch_to_other_editor
+Alt-D                       duplicate_editor
+Ctrl-Alt-N                  open_another_editor_instance
+Ctrl-X N                     create_new_file
 Alt-Z                       toggle_line_wrap
+Alt-A                       align_cursors
 Alt-Shift-L                 toggle_line_numbers
-
-Ctrl-Shift-Alt-N            open_another_editor_instance
+#Ctrl-PageUp                 move_to_previous_buffer
+#Ctrl-PageDown               move_to_next_buffer
+#Alt-I                       add_cursors_to_line_ends
+#Alt-S                       add_cursors_to_line_starts
+#Alt-H                       move_editor_to_the_left
+#Alt-L                       move_editor_to_the_right
+#Ctrl-Shift-N                create_new_file_on_the_side
+Ctrl-Shift->                create_cursor_below
+Ctrl-Shift-<                create_cursor_above
 
 [open file dialog]
 
@@ -252,7 +166,6 @@ Ctrl-2                      open_entry_on_the_right
 Shift-Enter                 open_entry_in_explorer
 
 Tab                         open_directory
-
 Backspace                   pop_directory
 
 
@@ -271,92 +184,43 @@ Alt-R                       toggle_regex_search
 
 [common]
 
-# Common key combos may be used as a fallback if they are not defined in more specific sections.
-# For example, if "move_up" is not defined in [editors], the one in the [common] section will be matched.
-
-Ctrl-N                  move_down
-Ctrl-P                  move_up
-Ctrl-A                  jump_to_line_start
-Ctrl-E                  jump_to_line_end
-Ctrl-S                  search_in_buffer
-Ctrl-B                    move_left
-Ctrl-F                    move_right
-Ctrl-K                    cut_to_end_of_line
-Ctrl-/                    undo
-Ctrl-Y                    paste
-Alt-W                      copy
+Ctrl-N                      move_down
+Ctrl-P                      move_up
+Ctrl-A                      jump_to_line_start
+Ctrl-E                      jump_to_line_end
+Ctrl-S                      search_in_buffer
+Ctrl-B                      move_left
+Ctrl-F                      move_right
+Ctrl-K                      cut_to_end_of_line
+Ctrl-/                      undo
+Ctrl-\                      redo
+Ctrl-Y                      paste
+Alt-W                       copy
 Ctrl-W                      cut
 Ctrl-V                      move_down_one_page
-Alt-V                      move_up_one_page
-
+Alt-V                       move_up_one_page
 Alt-X                       show_commands
-#Ctrl-Shift-P                show_commands
-
-Ctrl-Alt-P                  switch_to_project
-
-#Ctrl-F                      search_in_buffer
-Alt-F                       search_in_buffer_dropdown_mode
-Ctrl-Shift-F                search_in_project
-
-Ctrl-Shift-P                      open_file_by_name
+Ctrl-X B                    open_file_by_name
 Ctrl-O                      navigate_to_file
-Ctrl-Shift-O                navigate_to_file_from_root
-Ctrl-Tab                    switch_between_open_files
-
 Ctrl-G                      escape
-#Ctrl-V                      paste
-
-#Ctrl-Z                      undo
-Ctrl-Shift-Z                redo
-
-Ctrl-D                      select_word
-Ctrl-H                      select_all
-
-
-Ctrl-Shift-Delete           delete_to_end_of_line
-Ctrl-Shift-Backspace        delete_to_start_of_line
-
-Ctrl-Escape                      close_current_editor
-Ctrl-Shift-W                close_other_editor
-
-#Escape                      escape  # combines close_dialog and remove_additional_cursors
-
+Ctrl-X Ctrl-H               select_all
+Ctrl-X Ctrl-C               close_current_editor
+Ctrl-X 1                    close_other_editor
+Alt-F                       move_right_through_word
+Alt-B                       move_left_through_word
+Alt-.                       jump_to_file_end
+Alt-,                       jump_to_file_start
 Ctrl-Shift-L                toggle_expand
-
-#trl-B                      build_panel_toggle
-
+Ctrl-Shift-B                build_panel_toggle
 F11                         toggle_fullscreen
-
 Enter                       open_entry_in_place
-
 Tab                         focus_next_ui_element
 Shift-Tab                   focus_previous_ui_element
-
-# {Shift}- means shift is optional, the key combination will still be matched.
-# NOTE: in this editor the Shift key is hard-coded to extend selection when held
-#Shift}-ArrowUp             move_up
-{Shift}-Ctrl-ArrowUp        move_up_fast
-{Shift}-PageUp              move_up_one_page
-
-{Shift}-ArrowDown           move_down
-{Shift}-Ctrl-ArrowDown      move_down_fast
-{Shift}-PageDown            move_down_one_page
-
-{Shift}-ArrowLeft           move_left
-{Shift}-Alt-ArrowLeft       move_left_by_character_type
-{Shift}-Ctrl-ArrowLeft      move_left_through_word_throttled
-{Shift}-Meta-ArrowLeft      move_left_through_word
-
-{Shift}-ArrowRight          move_right
-{Shift}-Alt-ArrowRight      move_right_by_character_type
-{Shift}-Ctrl-ArrowRight     move_right_through_word_throttled
-{Shift}-Meta-ArrowRight     move_right_through_word
-
-{Shift}-Home                jump_to_line_start
-{Shift}-End                 jump_to_line_end
-{Shift}-Ctrl-Home           jump_to_file_start
-{Shift}-Ctrl-End            jump_to_file_end
-{Shift}-Ctrl-M              jump_to_matching_bracket
+#Ctrl-D                      select_word
+#Ctrl-Alt-P                  switch_to_project
+#Ctrl-Shift-F                search_in_project
+#Ctrl-Shift-Delete           delete_to_end_of_line
+#Ctrl-Shift-Backspace        delete_to_start_of_line
 
 {Shift}-Backspace           delete_left_char
 {Shift}-Delete              delete_right_char
@@ -367,8 +231,8 @@ Shift-Tab                   focus_previous_ui_element
 Ctrl-Backspace              delete_left_by_character_type_fast
 Ctrl-Delete                 delete_right_by_character_type_fast
 
-Ctrl-Plus                   increase_font_size
-Ctrl-Minus                  decrease_font_size
+Ctrl-X Ctrl-Shift-Plus                   increase_font_size
+Ctrl-X Ctrl-Shift-Minus                  decrease_font_size
 Ctrl-0                      reset_font_size_to_default
 Ctrl-MouseMiddle            reset_font_size_to_default
 
@@ -383,11 +247,11 @@ Shift-Ctrl-F8               go_to_previous_build_error_on_the_side
 theme: default
 
 [fonts]
-font:           Fira Code
-font_ui:       Fira Code
+font:          Fira Code
+font_ui:       default
 font_ui_bold:  default
-font_size:     15
-font_ui_size:  15
+font_size:     18
+font_ui_size:  17
 anti_aliasing: lcd  # options: lcd, normal
 hinting:       true
 
