@@ -1,7 +1,6 @@
-[16]  # Version number. Do not delete.
+[25]  # Version number. Do not delete.
 
 [[workspace]]
-C:/HandMadeHero/src
 
 [ignore]
 .svn
@@ -18,9 +17,8 @@ cursor_as_block:                                    true
 cursor_blink_time_in_seconds:                       5
 highlight_selection_occurrences:                    true
 highlight_line_with_cursor:                         false
-highlight_matching_brackets:                        false
+highlight_matching_brackets:                        true
 show_paste_effect:                                  true
-disable_file_open_close_animations:                 false
 double_shift_to_search_in_workspace:                false
 strip_trailing_whitespace_on_save:                  except_lines_with_cursor  # options: all, except_lines_with_cursor, disabled
 smooth_scrolling:                                   true
@@ -29,8 +27,7 @@ line_height_scale_percent:                          120
 max_editor_width:                                   -1
 can_cancel_go_to_line:                              true
 copy_whole_line_without_selection:                  false
-editor_history_size:                                1024
-line_wrap_is_on_by_default:                         false
+line_wrap_is_on_by_default:                         true
 show_line_numbers:                                  false
 show_ruler_at_column:                               0
 colored_titlebar:                                   true   # Windows 11+ only
@@ -40,7 +37,7 @@ draw_indent_guides:                                 false
 auto_surround_with_brackets_and_quotes:             false
 auto_close_brackets:                                false
 prefer_system_file_dialogs:                         false  # Windows only
-persist_local_search_results:                       false  # if true, search results will stay highlighted and you have to dismiss them using the `escape` action
+persist_local_search_results:                       true  # if true, search results will stay highlighted and you have to dismiss them using the `escape` action
 load_most_recent_project_on_start:                  true
 projects_sorting_order:                             most_recent_first
 
@@ -68,9 +65,25 @@ status_bar_show_selected_text_length:               false
 show_scrollbar_marks:                               true
 scrollbar_width_scale:                              1.0
 scrollbar_min_opacity:                              0.0   # if you want the scrollbar to be always visible, set this to 1.0
-scrollbar_max_opacity:                              1.0
+scrollbar_max_opacity:                              0.0
 scrollbar_fade_in_sensitivity:                      10.0  # controls when the scrollbar appears as the mouse pointer gets close
 scrollbar_fade_out_delay_seconds:                   2.0   # how long the scrollbar stays visible after scrolling
+
+# Added after migration to version [25]
+active_pane_border_width:                        0.0   # set the width to 0.0 to disable
+inactive_pane_dim_overlay_opacity:               0.0   # controls how dim the inactive panes should be
+comment_highlight_words1:                        TODO, TODO:, NOTE, NOTE:  # a comma-separated list of words to highlight within comments using the color `code_comment_highlight1`
+comment_highlight_words2:                        # words to highlight using `code_comment_highlight2`
+comment_highlight_words3:                        # words to highlight using `code_comment_highlight3`
+comment_highlight_words4:                        # words to highlight using `code_comment_highlight4`
+enable_temporary_editors:                        true  # when enabled, any editors are opened temporarily until an edit, a save, or a keep_editor command is used. Any newly opened editor will replace the existing temporary editor
+cursor_position_after_jump:                      0.45  # controls where the cursor ends up relatively to the viewport after jumping to a search result or an error. 0.0 is top of the screen, 1.0 - bottom, 0.5 - center
+closing_last_editor_in_pane_should_close_pane:   true
+closing_last_editor_should_exit_program:         false
+show_pane_numbers:                               false
+show_tab_characters_in_selection:                true
+line_endings:                                    preserve  # options: lf, crlf, preserve
+
 
 # NOTE: some settings can be specified for a subset of files, based on their language or a wildcard,
 # for example:
@@ -78,44 +91,10 @@ scrollbar_fade_out_delay_seconds:                   2.0   # how long the scrollb
 # [lang: golang, cpp, c, ...]
 
 [file: *.md, *.txt]
-line_wrap_is_on_by_default:                         true
 draw_indent_guides:                                 false
 
 
-#Windows
- [[build commands]]
-# build_working_dir:      <build working dir for all commands>  # <- paths relative to the workspace working dir (the first one in the list) are allowed
- open_panel_on_build:    true  #  <- any settings specified here will apply to all commands unless overridden
- close_panel_on_success: false
- clear_build_output_before_running: true
- error_regex:            ^(?P<file>.*)\((?P<line>\d+),?(?P<col>\d+)?\)[ ]?: (?P<type>error) (?P<msg>.*)$
- auto_jump_to_error:     true
 
-
- # Example error regexes:
-# For jai:    ^(?P<file>.*):(?P<line>\d+),(?P<col>\d+): (?P<type>Error|Warning|Info|...):* (?P<msg>.*)|^(?P<msg1>.*error LNK.*)
-# For msvc:   ^(?P<file>.*)\((?P<line>\d+),?(?P<col>\d+)?\)[ ]?: (?P<type>error|warning) (?P<msg>.*)$
-# For golang: ^(?P<file>.*):(?P<line>\d+):(?P<col>\d+): (?P<msg>.*)$
-# For gcc:    ^(?P<file>.*):(?P<line>\d+):(?P<col>\d+): (?P<type>error|warning): (?P<msg>.*) (\[(?P<msg1>.*)\])?$
-# ... let us know what regex works for you and we'll add it here
-
-
- [Debug Build And Run]   # <- command name. Can be arbitrary
- build_command:           build.bat  # should be an executable or a script
-# build_working_dir:      <build working dir for this command only>
-# timeout_in_seconds:     5             # if you don't want a timeout, don't specify it
-# run_command:            test.exe      # will be run if build succeeds
-# run_working_dir:        W:/focus      # working dir for the run command
- key_binding:            F5
-
- [Run]                   # <- You could have commands that don't build anything and just run something
- run_command:            devenv ../build/win32_handmade.exe
-# run_working_dir:        /home/user/test
- key_binding:            Ctrl-F5
-
- [Release]
-# build_command:          jai first.jai - release
-# key_binding:            F9
 
 
 
@@ -129,7 +108,6 @@ draw_indent_guides:                                 false
 Alt-F4                      quit
 Ctrl-Shift-W                select_word_or_create_another_cursor
 #Ctrl-Shift->               revert_select_word_or_create_another_cursor
-#Ctrl-,                     move_selection_to_next_word
 Ctrl-Shift-A                select_all_occurrences
 Ctrl-X Ctrl-K               duplicate_lines
 Alt-P                       move_selected_lines_up
@@ -144,14 +122,14 @@ Alt-K                       scroll_viewport_up
 Alt-J                       scroll_viewport_down
 Ctrl-L                      move_cursor_to_viewport_center
 Enter                       break_line
-Ctrl-X 2                    switch_to_left_editor
-Ctrl-X 3                    switch_to_right_editor
-Ctrl-X O                    switch_to_other_editor
+Ctrl-X O                    switch_to_side_pane
 Alt-D                       duplicate_editor
 Ctrl-Alt-N                  open_another_editor_instance
 Ctrl-X N                    create_new_file
+Ctrl-Shift-P                switch_to_project
 Alt-Z                       toggle_line_wrap
 Alt-A                       align_cursors
+Alt-I                       autoindent_region
 Alt-Shift-L                 toggle_line_numbers
 #Ctrl-PageUp                move_to_previous_buffer
 #Ctrl-PageDown              move_to_next_buffer
@@ -162,20 +140,33 @@ Alt-Shift-L                 toggle_line_numbers
 #Ctrl-Shift-N               create_new_file_on_the_side
 Ctrl-.                      create_cursor_below
 Ctrl-,                      create_cursor_above
+Ctrl-X 1                    close_pane
+
+# Added after migration to version [25]
+Ctrl-Alt-S ArrowLeft        move_editor_left
+Ctrl-Alt-S ArrowRight       move_editor_right
+Ctrl-Alt-S ArrowUp          move_editor_top
+Ctrl-Alt-S ArrowDown        move_editor_bottom
+Ctrl-Alt-X ArrowLeft        split_left
+Ctrl-Alt-X ArrowRight       split_right
+Ctrl-Alt-X ArrowUp          split_top
+Ctrl-Alt-X ArrowDown        split_bottom
+Ctrl-Alt-D ArrowLeft        duplicate_editor_left
+Ctrl-Alt-D ArrowRight       duplicate_editor_right
+Ctrl-Alt-D ArrowUp          duplicate_editor_top
+Ctrl-Alt-D ArrowDown        duplicate_editor_bottom
+Ctrl-Shift-T                reopen_closed_editor
+Ctrl-Alt-S Enter            keep_editor
 
 [open file dialog]
 
-Ctrl-Enter                  open_entry_on_the_side
-Ctrl-1                      open_entry_on_the_left
-Ctrl-2                      open_entry_on_the_right
+Ctrl-Enter                  open_entry_in_side_pane
 Shift-Enter                 open_entry_in_explorer
 Tab                         open_directory
 Backspace                   pop_directory
 
 [search dialog]
-Ctrl-Enter                  open_entry_on_the_side
-Ctrl-1                      open_entry_on_the_left
-Ctrl-2                      open_entry_on_the_right
+Ctrl-Enter                  open_entry_in_side_pane
 Shift-Enter                 move_up  # an alternative way to move
 Alt-C                       toggle_case_sensitive
 Alt-W                       toggle_whole_word
@@ -187,6 +178,7 @@ Ctrl-P                      move_up
 Ctrl-A                      jump_to_line_start
 Ctrl-E                      jump_to_line_end
 Ctrl-S                      search_in_buffer
+Alt-S                       search_in_project
 Ctrl-B                      move_left
 Ctrl-F                      move_right
 Ctrl-K                      cut_to_end_of_line
@@ -202,16 +194,15 @@ Ctrl-X B                    open_file_by_name
 Ctrl-X Ctrl-F               navigate_to_file
 Ctrl-G                      escape
 Ctrl-X H                    select_all
-Ctrl-X Ctrl-C               close_current_editor
-Ctrl-X 1                    close_other_editor
+Ctrl-X Ctrl-C               close_editor
 Alt-F                       move_right_through_word
 Alt-B                       move_left_through_word
 Alt-.                       jump_to_file_end
 Alt-,                       jump_to_file_start
 Ctrl-Shift-L                toggle_expand
-Ctrl-Shift-B                build_panel_toggle
+Ctrl-Shift-B                toggle_build_panel
 F11                         toggle_fullscreen
-Enter                       open_entry_in_place
+Enter                       open_entry
 Tab                         focus_next_ui_element
 Shift-Tab                   focus_previous_ui_element
 Ctrl-D                      delete_right_char
@@ -234,9 +225,32 @@ Ctrl-0                      reset_font_size_to_default
 Ctrl-MouseMiddle            reset_font_size_to_default
 
 Ctrl-TAB                    go_to_next_build_error
-#Ctrl-F8                     go_to_next_build_error_on_the_side
-Ctrl-Shift-TAB                    go_to_previous_build_error
-Shift-Ctrl-F8               go_to_previous_build_error_on_the_side
+#Ctrl-F8                    go_to_next_build_error_on_the_side
+Ctrl-Shift-TAB              go_to_previous_build_error
+Shift-Ctrl-F8               go_to_previous_build_error_in_side_pane
+
+# Added after migration to version [25]
+Ctrl-Shift-W                close_pane
+Ctrl-Alt-W ArrowLeft        close_left_pane
+Ctrl-Alt-W ArrowRight       close_right_pane
+Ctrl-Alt-W ArrowUp          close_top_pane
+Ctrl-Alt-W ArrowDown        close_bottom_pane
+Ctrl-Shift-Alt-W            close_other_panes
+Ctrl-Shift-1                switch_to_top_pane
+Ctrl-Shift-2                switch_to_bottom_pane
+Ctrl-Alt-Shift-ArrowLeft    switch_to_left_pane
+Ctrl-Alt-Shift-ArrowRight   switch_to_right_pane
+Ctrl-Alt-Shift-ArrowUp      switch_to_top_pane
+Ctrl-Alt-Shift-ArrowDown    switch_to_bottom_pane
+Ctrl-1                      switch_to_pane_1
+Ctrl-2                      switch_to_pane_2
+Ctrl-3                      switch_to_pane_3
+Ctrl-4                      switch_to_pane_4
+Ctrl-5                      switch_to_pane_5
+Ctrl-6                      switch_to_pane_6
+Ctrl-7                      switch_to_pane_7
+Ctrl-8                      switch_to_pane_8
+Ctrl-9                      switch_to_pane_9
 
 [[style]]
 theme: default
@@ -279,7 +293,7 @@ scrollbar_background:                   10191F4C
 cursor:                                 26B2B2FF
 cursor_inactive:                        196666FF
 paste_animation:                        1C4449FF
-splitter:                               21333FFF
+splitter:                               10191FFF
 splitter_hover:                         1C4449FF
 ruler:                                  FCEDFC26
 indent_guide:                           FCEDFC26
@@ -345,9 +359,23 @@ code_builtin_exception:                 E0AD82FF
 code_directive:                         E67D74FF
 code_directive_modifier:                E67D74FF
 
-code_header:                            E67D74FF
+code_header1:                           E67D74FF
 code_header2:                           E0AD82FF
 code_header3:                           E0AD82FF
 code_header4:                           E0AD82FF
 code_header5:                           E0AD82FF
 code_header6:                           E0AD82FF
+
+# Added after migration to version [25]
+active_pane_border:                     196666FF
+inactive_pane_dim_overlay:              050505FF
+code_comment_highlight1:                E0AD82FF
+code_comment_highlight2:                FF0000FF
+code_comment_highlight3:                E67D74FF
+code_comment_highlight4:                D699B5FF
+cursor_line_highlight:                  21333FFF
+color_preview_title_bar:                21333FFF
+code_addition:                          33B333FF
+code_deletion:                          E64D4DFF
+region_addition:                        2260224C
+region_deletion:                        7722224C
