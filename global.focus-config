@@ -38,7 +38,7 @@ auto_surround_with_brackets_and_quotes:             false
 auto_close_brackets:                                false
 prefer_system_file_dialogs:                         false  # Windows only
 persist_local_search_results:                       true  # if true, search results will stay highlighted and you have to dismiss them using the `escape` action
-load_most_recent_project_on_start:                  true
+load_most_recent_project_on_start:                  false
 projects_sorting_order:                             most_recent_first
 
 build_panel_stays_in_one_place:                     false  # if false, the build panel will flip to the inactive pane in two pane layouts
@@ -123,13 +123,14 @@ Alt-J                       scroll_viewport_down
 Ctrl-L                      move_cursor_to_viewport_center
 Enter                       break_line
 Ctrl-X O                    switch_to_side_pane
-Alt-D                       duplicate_editor
+Ctrl-X 2                    split_right
 Ctrl-Alt-N                  open_another_editor_instance
 Ctrl-X N                    create_new_file
 Ctrl-Shift-P                switch_to_project
 Alt-Z                       toggle_line_wrap
 Alt-A                       align_cursors
 Alt-I                       autoindent_region
+Alt-U                       change_case_cycle
 Alt-Shift-L                 toggle_line_numbers
 #Ctrl-PageUp                move_to_previous_buffer
 #Ctrl-PageDown              move_to_next_buffer
@@ -206,7 +207,10 @@ Enter                       open_entry
 Tab                         focus_next_ui_element
 Shift-Tab                   focus_previous_ui_element
 Ctrl-D                      delete_right_char
-#Ctrl-D                     select_word
+
+Alt-D                       delete_right_through_word
+
+Ctrl-Q                      select_word
 #Ctrl-Alt-P                 switch_to_project
 #Ctrl-Shift-F               search_in_project
 #Ctrl-Shift-Delete          delete_to_end_of_line
@@ -215,8 +219,6 @@ Ctrl-D                      delete_right_char
 {Shift}-Delete              delete_right_char
 {Shift}-Alt-Backspace       delete_left_by_character_type
 {Shift}-Alt-Delete          delete_right_by_character_type
-{Shift}-Meta-Backspace      delete_left_through_word
-{Shift}-Meta-Delete         delete_right_through_word
 Ctrl-Backspace              delete_left_by_character_type_fast
 Ctrl-Delete                 delete_right_by_character_type_fast
 Ctrl-X Ctrl-Shift-Plus      increase_font_size
@@ -253,7 +255,7 @@ Ctrl-8                      switch_to_pane_8
 Ctrl-9                      switch_to_pane_9
 
 [[style]]
-theme: default
+theme: gruber-darker
 
 [fonts]
 font:          default
