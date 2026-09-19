@@ -93,7 +93,7 @@
 (add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode))
 (add-to-list 'auto-mode-alist '("\\.[b]\\'" . simpc-mode))
 
-(add-to-list 'auto-mode-alist '("\\.[css]\\'" . css-mode))
+
 ;; download formatter system wide dev-util/astyle on gentoo
 ;; for windows put astyle.exe to your path env 
 ;; astyle-formatter
