@@ -66,14 +66,6 @@
   (setq company-minimum-prefix-length 3)
   (global-company-mode 1))
 
-;; Rainbow mode
-(use-package rainbow-mode
-  :hook ((css-mode
-          html-mode
-          web-mode)
-         . rainbow-mode)
-  :bind
-  ("C-c c" . rainbow-mode))
 
 ;; Multiple cursors
 (use-package multiple-cursors
@@ -101,6 +93,7 @@
 (add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode))
 (add-to-list 'auto-mode-alist '("\\.[b]\\'" . simpc-mode))
 
+(add-to-list 'auto-mode-alist '("\\.[css]\\'" . css-mode))
 ;; download formatter system wide dev-util/astyle on gentoo
 ;; for windows put astyle.exe to your path env 
 ;; astyle-formatter
@@ -129,25 +122,23 @@
 (use-package nasm-mode
   :mode ("\\.asm\\'" . nasm-mode))
 
-(use-package web-mode
-  :ensure t
-  :mode "\\.html?\\'" 
-  :mode "\\.css\\'"
-  :mode "\\.phtml\\'"
-  :mode "\\.tpl\\.php\\'"
-  :mode "\\.[agj]sp\\'"
-  :mode "\\.as[cp]x\\'"
-  :mode "\\.erb\\'"
-  :mode "\\.mustache\\'"
-  :mode "\\.djhtml\\'"
-  :config
-  (setq web-mode-markup-indent-offser 2
-        web-mode-css-indent-offset 2
-        web-mode-code-indent-offset 2))
+;; Rainbow mode
+(use-package rainbow-mode
+  :hook ((css-mode
+          html-mode
+          javascript-mode)
+         . rainbow-mode)
+  :bind
+  ("C-c c" . rainbow-mode))
+
+  
 
 (use-package emmet-mode
   :ensure t
-  :hook (web-mode . emmet-mode)
+  :hook ((html-mode . emmet-mode)
+         (web-mode  . emmet-mode)
+         (css-mode  . emmet-mode)
+         (javascript-mode  . emmet-mode))
   :config
   (setq emmet-indent-after-insert nil
         emmet-indentation 2))
@@ -187,9 +178,9 @@
  '(display-line-numbers-type 'relative)
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(astyle company emmet-mode gruber-darker-theme magit move-text
-            multiple-cursors nasm-mode rainbow-mode rfc-mode rust-mode
-            smex tuareg web-mode))
+   '(astyle company emmet-mode go-mode gruber-darker-theme magit
+            move-text multiple-cursors nasm-mode rainbow-mode rfc-mode
+            rust-mode smex tuareg))
  '(warning-suppress-types '((native-compiler))))
 
 (custom-set-faces
