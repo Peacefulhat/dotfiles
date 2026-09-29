@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; My UI Changes
 (tool-bar-mode 0)                 ;; Disable tool bar
 (menu-bar-mode 0)                 ;; Disable menu bar
@@ -21,7 +23,6 @@
 ;; Tabs to spaces
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
-(setq python-indent-offset 4)
 (add-hook 'prog-mode-hook (lambda () (setq tab-width 4)))
 
 ;; font
@@ -93,7 +94,6 @@
 (add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode))
 (add-to-list 'auto-mode-alist '("\\.[b]\\'" . simpc-mode))
 
-
 ;; download formatter system wide dev-util/astyle on gentoo
 ;; for windows put astyle.exe to your path env 
 ;; astyle-formatter
@@ -108,12 +108,29 @@
      t)
     (goto-line saved-line-number)))
 
-(global-set-key (kbd "C-c i") #'astyle-buffer)
-
 ;;rust mode
 (use-package rust-mode
   :mode ("\\.rs\\'" . rust-mode))
-  
+
+(defun rust-buffer ()
+  (interactive)
+  (let ((saved-line-number (line-number-at-pos)))
+    (shell-command-on-region
+     (point-min)
+     (point-max)
+     "rustfmt"
+     nil
+     t)
+    (goto-line saved-line-number)))
+(defun format-buffer ()
+  (interactive)
+  (if (derived-mode-p 'rust-mode)
+      (rust-buffer)
+    (when (derived-mode-p 'simpc-mode)
+      (astyle-buffer))))
+
+(global-set-key (kbd "C-c i") #'format-buffer)
+
 ;; go-mode
 (use-package go-mode
   :mode ("\\.go\\'" . go-mode))
@@ -142,6 +159,11 @@
   :config
   (setq emmet-indent-after-insert nil
         emmet-indentation 2))
+
+(setq compilation-environment
+      '("PAGER=cat"
+        "MANPAGER=cat"))
+
 
 ;; quick manpage lookup under cursor
 (global-set-key (kbd "C-c m") (lambda ()
